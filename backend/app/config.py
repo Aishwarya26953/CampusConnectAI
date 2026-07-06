@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str = ""
     ADMIN_EMAIL: str = "admin@campusconnect.edu"
     ADMIN_PASSWORD: str = None  # Must be set in .env
-    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+    CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000,https://campus-connect-ai-chi.vercel.app"
     
     # Security settings
     PASSWORD_MIN_LENGTH: int = 8
