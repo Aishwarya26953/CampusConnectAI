@@ -148,9 +148,13 @@ def seed():
         db.query(Department).delete()
         db.commit()
 
-        # ── Admin ─────────────────────────────────────
-        print("👤 Creating admin...")
-        admin = db.query(User).filter(User.role == UserRole.admin).first()
+               # ── Admin ─────────────────────────────────────
+        print("👤 Creating/updating admin...")
+
+        admin = db.query(User).filter(
+            User.role == UserRole.admin
+        ).first()
+
         if not admin:
             admin = User(
                 name="Campus Administrator",
@@ -161,8 +165,17 @@ def seed():
                 phone="+91-9000000000",
             )
             db.add(admin)
-            db.commit()
-            db.refresh(admin)
+
+        else:
+            admin.name = "Campus Administrator"
+            admin.email = settings.ADMIN_EMAIL
+            admin.password_hash = hash_password(settings.ADMIN_PASSWORD)
+            admin.status = UserStatus.approved
+
+        db.commit()
+        db.refresh(admin)
+
+        print("✅ Admin created/updated successfully")
 
         # ── Departments ───────────────────────────────
         print("🏢 Creating departments...")
