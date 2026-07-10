@@ -16,8 +16,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://campus-connect-ai-chi.vercel.app",
+    ],
+    allow_origin_regex=r"https://campus-connect-7kqs2b7v1-mmaaishwarya-1606s-projects.vercel.app/login",
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
